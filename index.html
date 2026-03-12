@@ -15,11 +15,7 @@
             --accent-gradient: linear-gradient(135deg, #6366f1, #a855f7);
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
             font-family: 'Inter', sans-serif;
@@ -31,25 +27,28 @@
             padding-bottom: 40px;
         }
 
-        /* Динамический фон (Mesh Gradient эффект) */
         @keyframes gradientBG {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
 
-        /* Эффект левитации (Floating) */
         @keyframes floating {
             0% { transform: translateY(0); }
             50% { transform: translateY(-6px); }
             100% { transform: translateY(0); }
         }
 
+        /* Анимация появления экранов */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         .float-1 { animation: floating 2s ease-in-out infinite; }
         .float-2 { animation: floating 2.5s ease-in-out infinite; }
         .float-3 { animation: floating 3s ease-in-out infinite; }
 
-        /* Glassmorphism */
         .glass {
             background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(12px);
@@ -66,382 +65,280 @@
             box-shadow: 0 0 20px rgba(99, 102, 241, 0.4);
         }
 
-        /* Контейнер и Секции */
-        .container {
-            padding: 0 20px;
-            max-width: 600px;
-            margin: 0 auto;
-        }
+        .container { padding: 0 20px; max-width: 600px; margin: 0 auto; }
+        section { margin-top: 40px; }
+        h2 { font-size: 24px; font-weight: 800; margin-bottom: 20px; text-align: center; }
 
-        section {
-            margin-top: 40px;
-        }
-
-        h2 {
-            font-size: 24px;
-            font-weight: 800;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-
-        /* Header / Блок доверия */
-        header {
-            text-align: center;
-            padding: 40px 20px 20px;
-        }
-
+        header { text-align: center; padding: 40px 20px 20px; }
         .logo {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
+            width: 80px; height: 80px; border-radius: 50%;
             background: var(--accent-gradient);
             margin: 0 auto 16px;
             box-shadow: 0 0 30px rgba(168, 85, 247, 0.6);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 32px;
-            font-weight: 800;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 32px; font-weight: 800;
         }
+        h1 { font-size: 28px; font-weight: 800; margin-bottom: 12px; }
+        .subtitle { color: var(--text-secondary); font-size: 14px; line-height: 1.5; }
 
-        h1 {
-            font-size: 28px;
-            font-weight: 800;
-            margin-bottom: 12px;
-        }
+        /* Логика экранов (SPA) */
+        .screen { display: none; animation: fadeIn 0.4s ease-out forwards; }
+        .screen.active { display: block; }
 
-        .subtitle {
-            color: var(--text-secondary);
-            font-size: 14px;
-            line-height: 1.5;
-        }
-
-        /* Кейсы (Snap Carousel) */
+        /* Кейсы */
         .carousel {
-            display: flex;
-            overflow-x: auto;
-            scroll-snap-type: x mandatory;
-            gap: 16px;
-            padding-bottom: 20px;
-            scrollbar-width: none; /* Firefox */
+            display: flex; overflow-x: auto; scroll-snap-type: x mandatory;
+            gap: 16px; padding-bottom: 20px; scrollbar-width: none;
         }
-        
-        .carousel::-webkit-scrollbar {
-            display: none; /* Chrome/Safari */
-        }
-
-        .carousel-item {
-            scroll-snap-align: center;
-            min-width: 85%;
-            flex-shrink: 0;
-        }
-        .case-title {
-            font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .case-text {
-            font-size: 14px;
-            margin-bottom: 8px;
-            line-height: 1.4;
-        }
+        .carousel::-webkit-scrollbar { display: none; }
+        .carousel-item { scroll-snap-align: center; min-width: 85%; flex-shrink: 0; }
+        .case-title { font-size: 18px; font-weight: 600; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+        .case-text { font-size: 14px; margin-bottom: 8px; line-height: 1.4; }
         .case-text span { font-weight: 600; color: #fff; }
 
         /* Тарифы */
-        .tier-wrapper {
-            margin-bottom: 20px;
-        }
-
-        .tier-price {
-            font-size: 24px;
-            font-weight: 800;
-            margin: 12px 0;
-            color: #a855f7;
-        }
-
-        .tier-list {
-            list-style: none;
-            font-size: 14px;
-            margin-bottom: 20px;
-            color: var(--text-secondary);
-        }
-
-        .tier-list li {
-            margin-bottom: 8px;
-            padding-left: 20px;
-            position: relative;
-        }
-
-        .tier-list li::before {
-            content: '✓';
-            position: absolute;
-            left: 0;
-            color: #6366f1;
-        }
+        .tier-wrapper { margin-bottom: 20px; }
+        .tier-price { font-size: 24px; font-weight: 800; margin: 12px 0; color: #a855f7; }
+        .tier-list { list-style: none; font-size: 14px; margin-bottom: 20px; color: var(--text-secondary); }
+        .tier-list li { margin-bottom: 8px; padding-left: 20px; position: relative; }
+        .tier-list li::before { content: '✓'; position: absolute; left: 0; color: #6366f1; }
 
         .btn {
-            display: block;
-            width: 100%;
-            padding: 16px;
-            border: none;
-            border-radius: 12px;
-            background: var(--accent-gradient);
-            color: #fff;
-            font-size: 16px;
-            font-weight: 600;
-            text-align: center;
-            cursor: pointer;
+            display: block; width: 100%; padding: 16px; border: none; border-radius: 12px;
+            background: var(--accent-gradient); color: #fff; font-size: 16px;
+            font-weight: 600; text-align: center; cursor: pointer;
             transition: transform 0.2s, box-shadow 0.2s;
+            margin-top: 20px;
         }
-
-        .btn:active {
-            transform: scale(0.98);
-        }
+        .btn:active { transform: scale(0.98); }
+        
+        /* Кнопка перехода к тарифам */
+        .btn-main { font-size: 18px; padding: 20px; box-shadow: 0 0 20px rgba(99, 102, 241, 0.4); }
 
         /* Отзывы */
-        .reviews-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
+        .reviews-grid { display: flex; flex-direction: column; gap: 16px; margin-bottom: 40px;}
+        .review-header { font-weight: 600; margin-bottom: 8px; }
+        .review-text { font-size: 14px; color: var(--text-secondary); font-style: italic; }
 
-        .review-header {
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
-
-        .review-text {
-            font-size: 14px;
-            color: var(--text-secondary);
-            font-style: italic;
-        }
-
-        /* Смарт-форма */
-        .form-group {
-            margin-bottom: 16px;
-        }
-
-        .form-label {
-            display: block;
-            font-size: 14px;
-            margin-bottom: 8px;
-            color: var(--text-secondary);
-        }
-
+        /* Форма */
+        .form-group { margin-bottom: 16px; }
+        .form-label { display: block; font-size: 14px; margin-bottom: 8px; color: var(--text-secondary); }
         .form-control {
-            width: 100%;
-            padding: 14px;
-            border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            background: rgba(0, 0, 0, 0.2);
-            color: #fff;
-            font-size: 16px;
-            font-family: 'Inter', sans-serif;
-            outline: none;
+            width: 100%; padding: 14px; border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.2); background: rgba(0, 0, 0, 0.2);
+            color: #fff; font-size: 16px; font-family: 'Inter', sans-serif; outline: none;
         }
-
-        .form-control:focus {
-            border-color: #a855f7;
-            box-shadow: 0 0 10px rgba(168, 85, 247, 0.2);
-        }
-
+        .form-control:focus { border-color: #a855f7; box-shadow: 0 0 10px rgba(168, 85, 247, 0.2); }
         select.form-control {
             appearance: none;
             background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
-            background-repeat: no-repeat;
-            background-position: right 14px center;
-            background-size: 16px;
+            background-repeat: no-repeat; background-position: right 14px center; background-size: 16px;
         }
-        
-        select.form-control option {
-            background: #1e1b4b;
-            color: #fff;
-        }
+        select.form-control option { background: #1e1b4b; color: #fff; }
     </style>
 </head>
 <body>
 
-    <header>
-        <div class="logo">AJ</div>
-        <h1>Antigravity jump</h1>
-        <p class="subtitle">Создаем цифровые продукты,<br>нарушающие законы гравитации бизнеса</p>
-    </header>
-
     <div class="container">
-        <section id="cases">
-            <h2>Наши кейсы</h2>
-            <div class="carousel">
-                <div class="carousel-item float-1">
-                    <div class="glass">
-                        <div class="case-title">📱 Магазин электроники (Новосибирск)</div>
-                        <p class="case-text"><span>Задача:</span> Автоматизировать учет товаров при перепродаже на Авито/Юла.</p>
-                        <p class="case-text"><span>Решение:</span> Разработка TMA-системы с быстрым вводом данных и калькулятором маржи.</p>
-                        <p class="case-text"><span>Результат:</span> Время на оформление одного товара снизилось с 10 до 4 минут.</p>
-                    </div>
-                </div>
-                <div class="carousel-item float-2">
-                    <div class="glass">
-                        <div class="case-title">☕️ Цифровое меню для кофейни</div>
-                        <p class="case-text"><span>Задача:</span> Избавиться от бумажных меню и очередей у кассы.</p>
-                        <p class="case-text"><span>Решение:</span> Интерактивное меню в Telegram с категориями и фото блюд.</p>
-                        <p class="case-text"><span>Результат:</span> Количество повторных заказов выросло на 15% за первый месяц.</p>
-                    </div>
-                </div>
-                <div class="carousel-item float-3">
-                    <div class="glass">
-                        <div class="case-title">🛠 Сайт-визитка для сервиса</div>
-                        <p class="case-text"><span>Задача:</span> Привлекать клиентов из поиска Google и Яндекс.</p>
-                        <p class="case-text"><span>Решение:</span> Высокоскоростной лендинг с SEO-оптимизацией и кнопкой связи в 1 клик.</p>
-                        <p class="case-text"><span>Результат:</span> Стоимость привлечения одного клиента снизилась на 30%.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+        
+        <div id="screen-main" class="screen active">
+            <header>
+                <div class="logo">AJ</div>
+                <h1>Antigravity jump</h1>
+                <p class="subtitle">Создаем цифровые продукты,<br>нарушающие законы гравитации бизнеса</p>
+            </header>
 
-        <section id="pricing">
-            <h2>Тарифы</h2>
-            
-            <div class="tier-wrapper float-1">
+            <section id="cases">
+                <h2>Наши кейсы</h2>
+                <div class="carousel">
+                    <div class="carousel-item float-1">
+                        <div class="glass">
+                            <div class="case-title">📱 Магазин электроники (Новосибирск)</div>
+                            <p class="case-text"><span>Задача:</span> Автоматизировать учет товаров при перепродаже на Авито/Юла.</p>
+                            <p class="case-text"><span>Решение:</span> Разработка TMA-системы с быстрым вводом данных и калькулятором маржи.</p>
+                            <p class="case-text"><span>Результат:</span> Время на оформление одного товара снизилось с 10 до 4 минут.</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item float-2">
+                        <div class="glass">
+                            <div class="case-title">☕️ Цифровое меню для кофейни</div>
+                            <p class="case-text"><span>Задача:</span> Избавиться от бумажных меню и очередей у кассы.</p>
+                            <p class="case-text"><span>Решение:</span> Интерактивное меню в Telegram с категориями и фото блюд.</p>
+                            <p class="case-text"><span>Результат:</span> Количество повторных заказов выросло на 15% за первый месяц.</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item float-3">
+                        <div class="glass">
+                            <div class="case-title">🛠 Сайт-визитка для сервиса</div>
+                            <p class="case-text"><span>Задача:</span> Привлекать клиентов из поиска Google и Яндекс.</p>
+                            <p class="case-text"><span>Решение:</span> Высокоскоростной лендинг с SEO-оптимизацией и кнопкой связи в 1 клик.</p>
+                            <p class="case-text"><span>Результат:</span> Стоимость привлечения одного клиента снизилась на 30%.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="reviews">
+                <h2>Что говорят клиенты</h2>
+                <div class="reviews-grid">
+                    <div class="float-1">
+                        <div class="glass">
+                            <div class="review-header">Алексей, перекуп электроники ⭐⭐⭐⭐⭐</div>
+                            <p class="review-text">"Заказал TMA для учета товаров. Теперь всё в телефоне, а не в блокноте. Окупилось за неделю!"</p>
+                        </div>
+                    </div>
+                    <div class="float-2">
+                        <div class="glass">
+                            <div class="review-header">Мария, владелец кофейни ⭐⭐⭐⭐⭐</div>
+                            <p class="review-text">"Сделали меню за 3 дня. Клиенты в восторге от того, что всё открывается прямо в Telegram."</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <button class="btn btn-main" onclick="switchScreen('screen-tariffs')">Посмотреть тарифы и заказать 🚀</button>
+        </div>
+
+        <div id="screen-tariffs" class="screen">
+            <section id="pricing">
+                <h2>Выберите тариф</h2>
+                
+                <div class="tier-wrapper float-1">
+                    <div class="glass">
+                        <h3>Пакет «Старт»</h3>
+                        <div class="tier-price">6 999 ₽</div>
+                        <ul class="tier-list">
+                            <li>Красивая одна страница (Landing Page)</li>
+                            <li>Адаптация под телефоны</li>
+                            <li>Форма обратной связи</li>
+                            <li>Срок: 1–2 дня</li>
+                        </ul>
+                        <button class="btn" onclick="selectTier('start')">Выбрать этот тариф</button>
+                    </div>
+                </div>
+
+                <div class="tier-wrapper float-2">
+                    <div class="glass">
+                        <h3>Пакет «Бизнес»</h3>
+                        <div class="tier-price">16 500 ₽</div>
+                        <ul class="tier-list">
+                            <li>Полноценное приложение (TMA)</li>
+                            <li>Каталог товаров/услуг</li>
+                            <li>Запись заказов в Google Таблицу</li>
+                            <li>Вибрация (Haptic) и умные кнопки</li>
+                            <li>Срок: 3–5 дней</li>
+                        </ul>
+                        <button class="btn" onclick="selectTier('business')">Выбрать этот тариф</button>
+                    </div>
+                </div>
+
+                <div class="tier-wrapper float-3">
+                    <div class="glass">
+                        <h3>Пакет «PRO-Автоматизация»</h3>
+                        <div class="tier-price">34 990 ₽</div>
+                        <ul class="tier-list">
+                            <li>Мини-приложение + Бот-помощник</li>
+                            <li>Уведомления о заказах в личку</li>
+                            <li>Полная настройка CRM-таблицы</li>
+                            <li>Срок: 7–10 дней</li>
+                        </ul>
+                        <button class="btn" onclick="selectTier('pro')">Выбрать этот тариф</button>
+                    </div>
+                </div>
+            </section>
+
+            <section id="orderSection">
+                <h2>Оформление заявки</h2>
                 <div class="glass">
-                    <h3>Пакет «Старт»</h3>
-                    <div class="tier-price">6 999 ₽</div>
-                    <ul class="tier-list">
-                        <li>Красивая одна страница (Landing Page)</li>
-                        <li>Адаптация под телефоны</li>
-                        <li>Форма обратной связи</li>
-                        <li>Срок: 1–2 дня</li>
-                    </ul>
-                    <button class="btn" onclick="selectTier('start')">Выбрать этот тариф</button>
+                    <form id="orderForm">
+                        <div class="form-group">
+                            <label class="form-label">Ваше имя</label>
+                            <input type="text" name="name" class="form-control" required placeholder="Иван Иванов">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Выбор услуги</label>
+                            <select name="service" id="serviceSelect" class="form-control" required>
+                                <option value="" disabled selected>Выберите тариф...</option>
+                                <option value="start">Пакет «Старт» - 6 999 ₽</option>
+                                <option value="business">Пакет «Бизнес» - 16 500 ₽</option>
+                                <option value="pro">Пакет «PRO» - 34 990 ₽</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Telegram Username</label>
+                            <input type="text" name="username" id="tgUsername" class="form-control" required placeholder="@username">
+                        </div>
+
+                        <button type="submit" class="btn" id="submitBtn">Отправить заявку</button>
+                    </form>
                 </div>
-            </div>
+            </section>
+        </div>
 
-            <div class="tier-wrapper float-2">
-                <div class="glass">
-                    <h3>Пакет «Бизнес»</h3>
-                    <div class="tier-price">16 500 ₽</div>
-                    <ul class="tier-list">
-                        <li>Полноценное приложение (TMA)</li>
-                        <li>Каталог товаров/услуг</li>
-                        <li>Запись заказов в Google Таблицу</li>
-                        <li>Вибрация (Haptic) и умные кнопки</li>
-                        <li>Срок: 3–5 дней</li>
-                    </ul>
-                    <button class="btn" onclick="selectTier('business')">Выбрать этот тариф</button>
-                </div>
-            </div>
-
-            <div class="tier-wrapper float-3">
-                <div class="glass">
-                    <h3>Пакет «PRO-Автоматизация»</h3>
-                    <div class="tier-price">34 990 ₽</div>
-                    <ul class="tier-list">
-                        <li>Мини-приложение + Бот-помощник</li>
-                        <li>Уведомления о заказах в личку</li>
-                        <li>Полная настройка CRM-таблицы</li>
-                        <li>Срок: 7–10 дней</li>
-                    </ul>
-                    <button class="btn" onclick="selectTier('pro')">Выбрать этот тариф</button>
-                </div>
-            </div>
-        </section>
-
-        <section id="reviews">
-            <h2>Что говорят клиенты</h2>
-            <div class="reviews-grid">
-                <div class="float-1">
-                    <div class="glass">
-                        <div class="review-header">Алексей, перекуп электроники ⭐⭐⭐⭐⭐</div>
-                        <p class="review-text">"Заказал TMA для учета товаров. Теперь всё в телефоне, а не в блокноте. Окупилось за неделю!"</p>
-                    </div>
-                </div>
-                <div class="float-2">
-                    <div class="glass">
-                        <div class="review-header">Мария, владелец кофейни ⭐⭐⭐⭐⭐</div>
-                        <p class="review-text">"Сделали меню за 3 дня. Клиенты в восторге от того, что всё открывается прямо в Telegram."</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="orderSection">
-            <h2>Оставить заявку</h2>
-            <div class="glass">
-                <form id="orderForm">
-                    <div class="form-group">
-                        <label class="form-label">Ваше имя</label>
-                        <input type="text" name="name" class="form-control" required placeholder="Иван Иванов">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="form-label">Выбор услуги</label>
-                        <select name="service" id="serviceSelect" class="form-control" required>
-                            <option value="" disabled selected>Выберите тариф...</option>
-                            <option value="start">Пакет «Старт» - 6 999 ₽</option>
-                            <option value="business">Пакет «Бизнес» - 16 500 ₽</option>
-                            <option value="pro">Пакет «PRO» - 34 990 ₽</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label">Telegram Username</label>
-                        <input type="text" name="username" id="tgUsername" class="form-control" required placeholder="@username">
-                    </div>
-
-                    <button type="submit" class="btn" id="submitBtn">Отправить заявку</button>
-                </form>
-            </div>
-        </section>
     </div>
 
     <script>
-        // Инициализация Telegram API
         const tg = window.Telegram.WebApp;
-        
-        // Расширяем приложение на весь экран телефона
         tg.expand();
-        // Сообщаем Telegram, что приложение готово к отображению
         tg.ready();
 
-        // Автоматически подтягиваем Username пользователя, если это возможно
+        // Настройка кнопки "Назад" в шапке Telegram
+        tg.BackButton.onClick(function() {
+            switchScreen('screen-main');
+        });
+
+        // Автозаполнение имени
         if (tg.initDataUnsafe && tg.initDataUnsafe.user) {
             const user = tg.initDataUnsafe.user;
             const tgInput = document.getElementById('tgUsername');
             if (user.username) {
                 tgInput.value = '@' + user.username;
             } else {
-                tgInput.value = user.first_name; // Если нет username, ставим имя
+                tgInput.value = user.first_name;
             }
         }
 
-        // Функция смарт-скролла и выбора тарифа
-        function selectTier(tierValue) {
-            // Вызываем тактильный отклик (легкая вибрация)
-            if (tg.HapticFeedback) {
-                tg.HapticFeedback.selectionChanged();
-            }
+        // Функция переключения экранов
+        function switchScreen(screenId) {
+            if (tg.HapticFeedback) { tg.HapticFeedback.selectionChanged(); }
             
-            // Устанавливаем значение в выпадающий список
+            // Скрываем все экраны
+            document.querySelectorAll('.screen').forEach(screen => {
+                screen.classList.remove('active');
+            });
+            
+            // Показываем нужный экран
+            document.getElementById(screenId).classList.add('active');
+            
+            // Скроллим в самый верх нового экрана
+            window.scrollTo(0, 0);
+
+            // Показываем кнопку "Назад" только если мы НЕ на главном экране
+            if (screenId === 'screen-main') {
+                tg.BackButton.hide();
+            } else {
+                tg.BackButton.show();
+            }
+        }
+
+        // Выбор тарифа и прокрутка к форме
+        function selectTier(tierValue) {
+            if (tg.HapticFeedback) { tg.HapticFeedback.selectionChanged(); }
             document.getElementById('serviceSelect').value = tierValue;
             
-            // Плавно скроллим к форме заказа
             document.getElementById('orderSection').scrollIntoView({ 
                 behavior: 'smooth',
                 block: 'start'
             });
         }
 
-        // Обработка отправки формы
+        // Отправка формы
         document.getElementById('orderForm').addEventListener('submit', function(e) {
-            e.preventDefault(); // Останавливаем стандартную перезагрузку страницы
+            e.preventDefault();
+            if (tg.HapticFeedback) { tg.HapticFeedback.notificationOccurred('success'); }
 
-            // Вызываем тактильный отклик успеха
-            if (tg.HapticFeedback) {
-                tg.HapticFeedback.notificationOccurred('success');
-            }
             const submitBtn = document.getElementById('submitBtn');
             const originalText = submitBtn.innerText;
             submitBtn.innerText = 'Отправка...';
@@ -450,22 +347,13 @@
             const formData = new FormData(this);
             const scriptURL = 'https://script.google.com/macros/s/AKfycbzkl1pL3H70lQL7pUzaqBKD9bswtmP3PhUbVtNgU_eI_7S_LcJasQfRND4qT3W2j7493Q/exec';
 
-            // Отправляем данные
-            fetch(scriptURL, { 
-                method: 'POST', 
-                mode: 'no-cors', // Важно для обхода политики CORS в Google скриптах
-                body: formData 
-            })
-            .then(response => {
-                // Из-за mode: 'no-cors' мы не можем прочитать ответ от сервера (он будет "опаковым"), 
-                // поэтому просто предполагаем успешную отправку.
+            fetch(scriptURL, { method: 'POST', mode: 'no-cors', body: formData })
+            .then(() => {
                 alert('Супер! Твоя заявка успешно отправлена.');
                 submitBtn.innerText = 'Успешно!';
-                
-                // Опционально: Закрыть приложение через 2 секунды
-                // setTimeout(() => { tg.close(); }, 2000); 
+                setTimeout(() => { tg.close(); }, 2000); // Закрываем апп после успеха
             })
-            .catch(error => {
+            .catch(() => {
                 alert('Произошла ошибка при отправке. Попробуй еще раз.');
                 submitBtn.innerText = originalText;
                 submitBtn.disabled = false;
